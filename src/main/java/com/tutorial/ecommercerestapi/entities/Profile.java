@@ -1,12 +1,15 @@
 package com.tutorial.ecommercerestapi.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Getter
 @Setter
 @Entity
@@ -29,5 +32,11 @@ public class Profile {
     @ColumnDefault("'0'")
     @Column(name = "loyalty_points", columnDefinition = "int UNSIGNED")
     private Long loyaltyPoints;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    @MapsId
+
+    private User user;
 
 }

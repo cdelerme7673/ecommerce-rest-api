@@ -1,9 +1,12 @@
 package com.tutorial.ecommercerestapi.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Getter
 @Setter
 @Entity
@@ -25,5 +28,10 @@ public class Address {
 
     @Column(name = "zip", nullable = false)
     private String zip;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @ToString.Exclude
+    private User user;
 
 }
