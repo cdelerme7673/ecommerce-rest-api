@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.tutorial.ecommercerestapi.dtos.UserDto;
 import com.tutorial.ecommercerestapi.repositories.UserRepository;
+import com.tutorial.ecommercerestapi.mappers.UserMapper;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/users")
 public class UserController {
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+//  private final  UserMapper userMapper;
 
     @GetMapping
     public Iterable<UserDto> getAllUsers() {
@@ -24,6 +26,7 @@ public class UserController {
                     user.getName(),
                     user.getEmail()
                     )
+//              .map(user -> userMapper.toDto(user))
                 ).toList();
     }
 
@@ -39,6 +42,7 @@ public class UserController {
                 user.getEmail()
         );
         return ResponseEntity.ok(userDto);
+//        return ResponseEntity.ok(userMapper.toDto(user));
     }
 
 }
